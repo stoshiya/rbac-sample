@@ -1,0 +1,22 @@
+{
+  "name": "rbac-sample",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "async": "^2.5.0",
+    "bcrypt": "^1.0.2",
+    "body-parser": "~1.17.1",
+    "connect-redis": "^3.3.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "^3.0.0",
+    "express": "~4.15.2",
+    "express-session": "^1.15.5",
+    "ioredis": "^3.1.4",
+    "mongoose": "^4.11.6",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0"
+  }
+}
