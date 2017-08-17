@@ -28,16 +28,14 @@ var select = { _id: 0, __v: 0, password: 0 };
 mongoose.model(name, schema);
 var Model = connection.model(name);
 
-exports.authenticate = function(identifier, password, callback) {
-  if (typeof identifier !== 'string' || typeof password !== 'string') {
+exports.authenticate = function(name, password, callback) {
+  if (typeof name !== 'string' || typeof password !== 'string') {
     callback(new Error('invalid parameter'));
     return;
   }
   async.waterfall([
     function(callback) {
-      var caseInsensitiveId = createRegExp(identifier, 'i');
-      var condition = { $or: [{ id: identifier }, { name: caseInsensitiveId }]};
-      Model.findOne(condition, { _id: 0, __v: 0 }, select).lean().exec(callback);
+      Model.findOne({ name: createRegExp(name, 'i') }, { _id: 0, __v: 0 }).lean().exec(callback);
     },
     function(data, callback) {
       data ? bcrypt.compare(password, data.password, function(err, compared) {
@@ -61,25 +59,16 @@ exports.create = function(obj, callback) {
     callback({ statusCode: 400, message: 'invalid parameter' });
     return;
   }
-  async.waterfall([
-    function(callback) {
-      Model.findOne({ name: createRegExp(obj.name, 'i') }, { _id: 1 }).limit(1).exec(function (err, exists) {
-        callback(err, Array.isArray(exists) && exists.length > 0);
-      });
-    },
-    function(exists, callback) {
-      exists ?
-        callback({ statusCode: 409 }) :
-        Model({
-          id:       uuid.v4().toString(),
-          name:     obj.name,
-          password: bcrypt.hashSync(obj.password, bcrypt.genSaltSync()),
-          role:     roles.indexOf(obj.role) !== -1 ? obj.role : defaultRole
-        }).save(function(err, result) {
-          err ? callback(err) : Model.findById(result._id, select).lean().exec(callback)
-        });
-    }
-  ], callback);
+  Model({
+    id:       uuid.v4().toString(),
+    name:     obj.name,
+    password: bcrypt.hashSync(obj.password, bcrypt.genSaltSync()),
+    role:     roles.indexOf(obj.role) !== -1 ? obj.role : defaultRole
+  }).save(function(err, result) {
+    err ?
+      callback(err.code === 11000 ? { statusCode: 409 } : err) :
+      Model.findById(result._id, select).lean().exec(callback);
+  });
 };
 
 exports.remove = function(id, callback) {
@@ -96,5 +85,9 @@ function createRegExp(s, flag) {
   flag = flag || '';
   return new RegExp('^' + s.replace(regexpSpecialCharacters, '\\$&') + '$', flag);
 }
+
+// for test.
+exports.model = Model;
+exports.db = connection.db;
 
 connection.on('error', console.error);
