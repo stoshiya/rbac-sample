@@ -7,9 +7,18 @@ function errorHandler(err, res) {
 }
 
 exports.get = function(req, res) {
-  if (req.session.passport.user.role === 'admin' ||
-    req.session.passport.user.id === req.params.id) {
+  if (req.session.passport.user.role === 'admin' || req.session.passport.user.id === req.params.id) {
     model.get(req.params.id, function (err, result) {
+      err ? errorHandler(err, res) : res.json(result);
+    });
+  } else {
+    res.sendStatus(403);
+  }
+};
+
+exports.create = function(req, res) {
+  if (req.session.passport.user.role === 'admin') {
+    model.create(req.body, function (err, result) {
       err ? errorHandler(err, res) : res.json(result);
     });
   } else {

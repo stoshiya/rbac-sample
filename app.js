@@ -40,12 +40,10 @@ app.use(session({
 
 var api = express.Router();
 api.use(authenticator);
-
-api.get('/users/:id', user.get);
-//api.post('/users',    user.create);
+api.get('/users/:id',    user.get);
+api.post('/users',       user.create);
 api.delete('/users/:id', user.remove);
 app.use('/api', api);
-
 
 module.exports = app;
 

@@ -56,9 +56,9 @@ Output:
 
 ## About Web API 
 
- - basic authentication
- - Supported methods: `GET/DELETE`
- - end point: `/api/users/:id`
+ - Basic authentication
+ - Supported methods: `GET/POST/DELETE`
+ - End point path: `/api/users/[:id]`
 
 
 ## Roles and behaviour
@@ -109,7 +109,7 @@ Output:
     Date: Tue, 15 Aug 2017 07:33:22 GMT
     Connection: keep-alive
 
-`admin` is allowed to get/delete all users.
+`admin` is allowed to get/delete all users and create new user.
 
     $ curl -u admin:test -X GET http://localhost:3000/api/users/2b114884-0ef2-4e50-8d91-b2a26c6735f9 | jq
       % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
