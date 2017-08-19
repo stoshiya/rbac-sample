@@ -1,6 +1,6 @@
 "use strict";
 
-require('./env');
+var helper = require('./helper');
 var assert = require('assert');
 var async = require('async');
 var bcrypt = require('bcrypt');
@@ -10,15 +10,15 @@ var target = require('./../models/user');
 
 describe('models/user.js', function() {
   before(function(callback) {
-    target.model.ensureIndexes(callback)
+    helper.before(callback)
   });
 
   beforeEach(function(callback) {
-    target.model.remove({}, callback);
+    helper.beforeEach(callback);
   });
 
   after(function(callback) {
-    target.db.dropDatabase(callback);
+    helper.after(callback);
   });
 
   it('#authenticate(): should return error with non-string name.', function (callback) {
