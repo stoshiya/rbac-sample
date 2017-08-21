@@ -1,5 +1,7 @@
 # rbac-sample
 
+[![CircleCI](https://circleci.com/gh/stoshiya/rbac-sample.svg?style=svg&circle-token=82e28952dde8c7b123b463fa2794ae7cc7af2ec4)](https://circleci.com/gh/stoshiya/rbac-sample)
+
 ## Requirement
 
  - node.js
