@@ -54,6 +54,11 @@ Output:
  - **REDIS_CONFIG**: redis server hostname, port and database. (default db is `0`)
 
 
+## Test
+
+    $ npm test
+
+
 ## About Web API 
 
  - Basic authentication
