@@ -6,7 +6,7 @@ var async = require('async');
 var assert = require('assert');
 var bcrypt = require('bcrypt');
 var faker = require('faker');
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 var target = require('./../routes/user');
 var model = require('./../models/user').model;
 
@@ -44,10 +44,10 @@ describe('routes/user.js', function() {
       session: {
         passport: { user: {
           role: 'user',
-          id: uuid.v4().toString()
+          id: uuid().toString()
         } } },
       params: {
-        id: uuid.v4().toString()
+        id: uuid().toString()
       }
     };
     target.get(req, res(403, callback));
@@ -58,10 +58,10 @@ describe('routes/user.js', function() {
       session: {
         passport: { user: {
           role: 'admin',
-          id: uuid.v4().toString()
+          id: uuid().toString()
         } } },
       params: {
-        id: uuid.v4().toString()
+        id: uuid().toString()
       }
     };
     target.get(req, res(404, callback));
@@ -72,7 +72,7 @@ describe('routes/user.js', function() {
       session: {
         passport: { user: {
           role: 'admin',
-          id: uuid.v4().toString()
+          id: uuid().toString()
         } } },
       params: {
         id: 0
@@ -87,10 +87,10 @@ describe('routes/user.js', function() {
       session: {
         passport: { user: {
           role: 'admin',
-          id: uuid.v4().toString()
+          id: uuid().toString()
         } } },
       params: {
-        id: uuid.v4().toString()
+        id: uuid().toString()
       }
     };
     async.series([
@@ -117,10 +117,10 @@ describe('routes/user.js', function() {
       session: {
         passport: { user: {
           role: 'user',
-          id: uuid.v4().toString()
+          id: uuid().toString()
         } } },
       params: {
-        id: uuid.v4().toString()
+        id: uuid().toString()
       }
     };
     target.create(req, res(403, callback));
@@ -139,10 +139,10 @@ describe('routes/user.js', function() {
       session: {
         passport: { user: {
           role: 'user',
-          id: uuid.v4().toString()
+          id: uuid().toString()
         } } },
       params: {
-        id: uuid.v4().toString()
+        id: uuid().toString()
       }
     };
     target.remove(req, res(403, callback));
@@ -153,10 +153,10 @@ describe('routes/user.js', function() {
       session: {
         passport: { user: {
           role: 'admin',
-          id: uuid.v4().toString()
+          id: uuid().toString()
         } } },
       params: {
-        id: uuid.v4().toString()
+        id: uuid().toString()
       }
     };
     target.remove(req, res(404, callback));
@@ -167,7 +167,7 @@ describe('routes/user.js', function() {
       session: {
         passport: { user: {
           role: 'admin',
-          id: uuid.v4().toString()
+          id: uuid().toString()
         } } },
       params: {
         id: 0
@@ -181,10 +181,10 @@ describe('routes/user.js', function() {
       session: {
         passport: { user: {
           role: 'admin',
-          id: uuid.v4().toString()
+          id: uuid().toString()
         } } },
       params: {
-        id: uuid.v4().toString()
+        id: uuid().toString()
       }
     };
     async.series([

@@ -5,7 +5,7 @@ var assert = require('assert');
 var async = require('async');
 var bcrypt = require('bcrypt');
 var faker = require('faker');
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 var target = require('./../models/user');
 
 describe('models/user.js', function() {
@@ -66,7 +66,7 @@ describe('models/user.js', function() {
     async.series([
       function(callback) {
         target.model({
-          id: uuid.v4().toString(),
+          id: uuid().toString(),
           name: name,
           password: bcrypt.hashSync(password, bcrypt.genSaltSync()),
           role: 'user'
@@ -113,7 +113,7 @@ describe('models/user.js', function() {
   });
 
   it('#get(): should return null when not found.', function (callback) {
-    var id = uuid.v4().toString();
+    var id = uuid().toString();
     var expected = null;
     target.get(id, function(err, actual) {
       if (err) {
@@ -126,7 +126,7 @@ describe('models/user.js', function() {
   });
 
   it('#get(): should return json when found.', function (callback) {
-    var id = uuid.v4().toString();
+    var id = uuid().toString();
     var name = faker.internet.userName();
     var password = faker.internet.password();
     var expected;
@@ -202,7 +202,7 @@ describe('models/user.js', function() {
   });
 
   it('#create(): should return error 409 when duplicated.', function (callback) {
-    var id = uuid.v4().toString();
+    var id = uuid().toString();
     var name = faker.internet.userName();
     var password = faker.internet.password();
     var expected = { statusCode: 409 };
@@ -233,7 +233,7 @@ describe('models/user.js', function() {
   });
 
   it('#create(): should return json when success.', function (callback) {
-    var id = uuid.v4().toString();
+    var id = uuid().toString();
     var name = faker.internet.userName();
     var password = faker.internet.password();
     target.create({ name: name, password: password }, function(err, actual) {
@@ -270,7 +270,7 @@ describe('models/user.js', function() {
   });
 
   it('#remove(): should return null when not found.', function (callback) {
-    var id = uuid.v4().toString();
+    var id = uuid().toString();
     var expected = null;
     target.remove(id, function(err, actual) {
       if (err) {
@@ -283,7 +283,7 @@ describe('models/user.js', function() {
   });
 
   it('#remove(): should return json when found.', function (callback) {
-    var id = uuid.v4().toString();
+    var id = uuid().toString();
     var name = faker.internet.userName();
     var password = faker.internet.password();
     var expected;

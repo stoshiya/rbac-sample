@@ -5,7 +5,7 @@ var connection = mongoose.createConnection(process.env.MONGO_URL);
 var Schema = mongoose.Schema;
 var async = require('async');
 var bcrypt = require('bcrypt');
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 
 var constants = require('./../lib/constants');
 
@@ -60,7 +60,7 @@ exports.create = function(obj, callback) {
     return;
   }
   Model({
-    id:       uuid.v4().toString(),
+    id:       uuid().toString(),
     name:     obj.name,
     password: bcrypt.hashSync(obj.password, bcrypt.genSaltSync()),
     role:     roles.indexOf(obj.role) !== -1 ? obj.role : defaultRole

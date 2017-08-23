@@ -2,17 +2,19 @@
 
 [![CircleCI](https://circleci.com/gh/stoshiya/rbac-sample.svg?style=svg&circle-token=82e28952dde8c7b123b463fa2794ae7cc7af2ec4)](https://circleci.com/gh/stoshiya/rbac-sample)
 
-## Requirement
+## Requirements
 
  - node.js
  - mongodb
  - redis
+
 
 ## Install
 
     $ git clone git@github.com:stoshiya/rbac-sample.git
     $ cd rbac-sample
     $ npm install
+
 
 ## Run
 
@@ -46,7 +48,6 @@ Output:
       role: 'admin',
       modified: 2017-08-15T07:22:11.523Z,
       created: 2017-08-15T07:22:11.523Z }
-
 
 
 ## Environment variables

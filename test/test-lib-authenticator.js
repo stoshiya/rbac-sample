@@ -6,7 +6,7 @@ var async = require('async');
 var bcrypt = require('bcrypt');
 var express = require('express');
 var faker = require('faker');
-var uuid = require('node-uuid');
+var uuid = require('uuid/v4');
 var request = require('supertest');
 var target = require('./../lib/authenticator');
 var passport = require('./../lib/passport');
@@ -46,7 +46,7 @@ describe('lib/authenticator.js', function () {
 
     var password = faker.internet.password();
     var user = {
-      id: uuid.v4().toString(),
+      id: uuid().toString(),
       name: faker.internet.userName(),
       password: bcrypt.hashSync(password, bcrypt.genSaltSync())
     };
