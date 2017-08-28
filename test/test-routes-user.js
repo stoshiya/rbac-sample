@@ -39,7 +39,7 @@ describe('routes/user.js', function() {
     }
   };
 
-  it('#get(): should return 403 with non admin and id not match.', function(callback) {
+  it('#get(): should return 404 with non admin and id not match.', function(callback) {
     var req = {
       session: {
         passport: { user: {
@@ -50,7 +50,7 @@ describe('routes/user.js', function() {
         id: uuid().toString()
       }
     };
-    target.get(req, res(403, callback));
+    target.get(req, res(404, callback));
   });
 
   it('#get(): should return 404 with the specified id is not found.', function(callback) {
@@ -112,7 +112,7 @@ describe('routes/user.js', function() {
     ], callback);
   });
 
-  it('#create(): should return 403 with user.', function(callback) {
+  it('#create(): should return 404 with user.', function(callback) {
     var req = {
       session: {
         passport: { user: {
@@ -123,7 +123,7 @@ describe('routes/user.js', function() {
         id: uuid().toString()
       }
     };
-    target.create(req, res(403, callback));
+    target.create(req, res(404, callback));
   });
 
   it('#create(): should return 400 with invalid body.', function(callback) {
@@ -134,7 +134,7 @@ describe('routes/user.js', function() {
     target.create(req, res(400, callback));
   });
 
-  it('#remove(): should return 403 with non admin and id not match.', function(callback) {
+  it('#remove(): should return 404 with non admin and id not match.', function(callback) {
     var req = {
       session: {
         passport: { user: {
@@ -145,7 +145,7 @@ describe('routes/user.js', function() {
         id: uuid().toString()
       }
     };
-    target.remove(req, res(403, callback));
+    target.remove(req, res(404, callback));
   });
 
   it('#remove(): should return 404 with the specified id is not found.', function(callback) {

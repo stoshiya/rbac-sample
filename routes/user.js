@@ -12,7 +12,7 @@ exports.get = function(req, res) {
       err ? errorHandler(err, res) : result ? res.json(result) : res.sendStatus(404);
     });
   } else {
-    res.sendStatus(403);
+    res.sendStatus(404);
   }
 };
 
@@ -22,7 +22,7 @@ exports.create = function(req, res) {
       err ? errorHandler(err, res) : res.status(201).json(result); // TODO add location header.
     });
   } else {
-    res.sendStatus(403);
+    res.sendStatus(404);
   }
 };
 
@@ -33,7 +33,7 @@ exports.remove = function(req, res) {
       err ? errorHandler(err, res) : res.sendStatus(result ? 204 : 404);
     });
   } else {
-    res.sendStatus(403);
+    res.sendStatus(404);
   }
 };
 

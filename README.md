@@ -74,7 +74,7 @@ Output:
 `user` is allowed to get/delete myself.  
 
     $ curl -i -u user:test -X GET http://localhost:3000/api/users/2b114884-0ef2-4e50-8d91-b2a26c6735f9
-    HTTP/1.1 403 Forbidden
+    HTTP/1.1 404 Not Found
     X-Powered-By: Express
     Content-Type: text/plain; charset=utf-8
     Content-Length: 9
@@ -86,7 +86,7 @@ Output:
 `readonly` is allowed to get myself.  
 
     $ curl -i -u readonly:test -X GET http://localhost:3000/api/users/2b114884-0ef2-4e50-8d91-b2a26c6735f9
-    HTTP/1.1 403 Forbidden
+    HTTP/1.1 404 Not Found
     X-Powered-By: Express
     Content-Type: text/plain; charset=utf-8
     Content-Length: 9
@@ -108,7 +108,7 @@ Output:
     }
 
     $ curl -i -u readonly:test -X DELETE http://localhost:3000/api/users/95adea0d-339b-4326-9d83-2ddea7d74e7a
-    HTTP/1.1 403 Forbidden
+    HTTP/1.1 404 Not Found
     X-Powered-By: Express
     Content-Type: text/plain; charset=utf-8
     Content-Length: 9
