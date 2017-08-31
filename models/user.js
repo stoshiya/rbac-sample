@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var async = require('async');
 var bcrypt = require('bcrypt');
 var uuid = require('uuid/v4');
+var debug = require('debug')('models:user');
 
 var constants = require('./../lib/constants');
 
@@ -90,4 +91,4 @@ function createRegExp(s, flag) {
 exports.model = Model;
 exports.db = connection.db;
 
-connection.on('error', console.error);
+connection.on('error', debug);

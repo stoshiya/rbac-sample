@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var SessionStore = require('connect-redis')(session);
+var debug = require('debug')('app');
 var authenticator = require('./lib/authenticator');
 var constants = require('./lib/constants');
 var passport = require('./lib/passport');
@@ -47,4 +48,4 @@ app.use('/api', api);
 
 module.exports = app;
 
-process.on('uncaughtException', console.error);
+process.on('uncaughtException', debug);
