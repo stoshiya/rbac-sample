@@ -200,8 +200,4 @@ describe('routes/user.js', function() {
       }
     ], callback);
   });
-
-  it('#errorHandler(): should return 500 without statusCode.', function(callback) {
-    target.errorHandler(new Error(), res(500, callback));
-  });
 });

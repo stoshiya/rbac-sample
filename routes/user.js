@@ -1,10 +1,7 @@
 "use strict";
 
 var model = require('./../models/user');
-
-function errorHandler(err, res) {
-  typeof err.statusCode === 'number' && isFinite(err.statusCode) ? res.sendStatus(err.statusCode) : res.sendStatus(500);
-}
+var errorHandler = require('./commonHandler').errorHandler;
 
 exports.get = function(req, res) {
   if (req.session.passport.user.role === 'admin' || req.session.passport.user.id === req.params.id) {
@@ -36,6 +33,3 @@ exports.remove = function(req, res) {
     res.sendStatus(404);
   }
 };
-
-// for test.
-exports.errorHandler = errorHandler;
